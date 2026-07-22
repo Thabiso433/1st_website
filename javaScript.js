@@ -1,39 +1,30 @@
 const agents = {
-  sarah: {
-    name: "Sarah Jenkins",
-    image: "images/agents/sarah.jpg",
-    phone: "+1 (555) 234-5678"
-  },
-  marcus: {
-    name: "Marcus Vance",
-    image: "images/agents/marcus.jpg",
-    phone: "+1 (555) 876-5432"
-  },
-  elena: {
-    name: "Elena Rostova",
-    image: "images/agents/elena.jpg",
-    phone: "+1 (555) 345-6789"
-  }
+  maki: { name: "Maki Hashane", image: "./agents/agent1.jpg", phone: "+27123456789" },
+  mpho: { name: "Mphonyane Mpho", image: "./agents/agent2.jpg", phone: "+27123456789" },
+  dave: { name: "Dave Santan", image: "./agents/agent3.avif", phone: "+27123456789" },
+  gabone: { name: "Gabone Gucci", image: "./agents/agent4.jpg", phone: "+27123456789" },
+  thabo: { name: "Thabo Chaotsane", image: "./agents/agent5.jpeg", phone: "+27123456789" },
+  tlaba: { name: "Tlaba Tefo", image: "./agents/agent6.jpg", phone: "+27123456789" }
 };
 
 const properties = [
-  { id: 1, title: "Modern Oceanview Villa", price: "$1,250,000", specs: "4 Beds • 3 Baths • 3,200 sqft", image: "images/houses/house1.jpg", agent: agents.sarah },
-  { id: 2, title: "Downtown Penthouse Suite", price: "$890,000", specs: "2 Beds • 2 Baths • 1,500 sqft", image: "images/houses/house2.jpg", agent: agents.marcus },
-  { id: 3, title: "Suburban Family Estate", price: "$650,000", specs: "5 Beds • 4 Baths • 4,100 sqft", image: "images/houses/house3.jpg", agent: agents.elena },
-  { id: 4, title: "Luxury Hillside Mansion", price: "$2,400,000", specs: "6 Beds • 5 Baths • 5,800 sqft", image: "images/houses/house4.jpg", agent: agents.sarah },
-  { id: 5, title: "Cozy Urban Loft", price: "$480,000", specs: "1 Bed • 1 Bath • 850 sqft", image: "images/houses/house5.jpg", agent: agents.marcus },
-  { id: 6, title: "Lakeside Modern Home", price: "$1,100,000", specs: "4 Beds • 3 Baths • 2,900 sqft", image: "images/houses/house6.jpg", agent: agents.elena },
-  { id: 7, title: "Contemporary Glass Cottage", price: "$720,000", specs: "3 Beds • 2 Baths • 1,800 sqft", image: "images/houses/house7.jpg", agent: agents.sarah },
-  { id: 8, title: "Skyline High-Rise Condominium", price: "$950,000", specs: "3 Beds • 2 Baths • 2,100 sqft", image: "images/houses/house8.jpg", agent: agents.marcus },
-  { id: 9, title: "Rustic Countryside Manor", price: "$830,000", specs: "4 Beds • 4 Baths • 3,600 sqft", image: "images/houses/house9.jpg", agent: agents.elena },
-  { id: 10, title: "Beachfront Bungalow", price: "$1,650,000", specs: "3 Beds • 3 Baths • 2,400 sqft", image: "images/houses/house10.jpg", agent: agents.sarah }
+  { id: 1, title: "Modern Oceanview Villa", price: "R1,250,000", specs: "4 Beds • 3 Baths • 3,200 sqft", image: "./Properties/p1.jpg", agent: agents.thabo },
+  { id: 2, title: "Downtown Penthouse Suite", price: "R890,000", specs: "2 Beds • 2 Baths • 1,500 sqft", image: "./Properties/p2.jpg", agent: agents.tlaba },
+  { id: 3, title: "Suburban Family Estate", price: "R650,000", specs: "5 Beds • 4 Baths • 4,100 sqft", image: "./Properties/p3.jpg", agent: agents.maki },
+  { id: 4, title: "Luxury Hillside Mansion", price: "R2,400,000", specs: "6 Beds • 5 Baths • 5,800 sqft", image: "./Properties/p4.jpg", agent: agents.dave },
+  { id: 5, title: "Cozy Urban Loft", price: "R480,000", specs: "1 Bed • 1 Bath • 850 sqft", image: "./Properties/p5.jpg", agent: agents.gabone },
+  { id: 6, title: "Lakeside Modern Home", price: "R1,100,000", specs: "4 Beds • 3 Baths • 2,900 sqft", image: "./Properties/p6.jpg", agent: agents.tlaba },
+  { id: 7, title: "Contemporary Glass Cottage", price: "R720,000", specs: "3 Beds • 2 Baths • 1,800 sqft", image: "./Properties/p7.jpg", agent: agents.dave },
+  { id: 8, title: "Skyline High-Rise Condominium", price: "R950,000", specs: "3 Beds • 2 Baths • 2,100 sqft", image: "./Properties/p8.jpg", agent: agents.thabo },
+  { id: 9, title: "Rustic Countryside Manor", price: "R830,000", specs: "4 Beds • 4 Baths • 3,600 sqft", image: "./Properties/p9.jpg", agent: agents.thabo },
+  { id: 10, title: "Beachfront Bungalow", price: "R1,650,000", specs: "3 Beds • 3 Baths • 2,400 sqft", image: "./Properties/p10.jpg", agent: agents.thabo }
 ];
 
 const authSection = document.getElementById('auth-sec');
 const mainApp = document.getElementById('main-web');
 const loginForm = document.getElementById('log-form');
 const registerForm = document.getElementById('reg-form');
-const userDisplay = document.getElementById('user-display');
+const userDisplay = document.getElementById('Display');
 const logoutBtn = document.getElementById('logout-btn');
 
 function switchAuthTab(tab) {
@@ -100,6 +91,11 @@ function renderProperties() {
     const card = document.createElement('div');
     card.className = 'property-card';
 
+    // Safe fallback if agent object is missing
+    const agentName = item.agent ? item.agent.name : "Agent";
+    const agentImg = item.agent ? item.agent.image : "";
+    const agentPhone = item.agent ? item.agent.phone : "#";
+
     card.innerHTML = `
       <img src="${item.image}" alt="${item.title}" class="property-img" />
       <div class="property-details">
@@ -109,13 +105,13 @@ function renderProperties() {
         
         <div class="agent-info">
           <div class="agent-profile">
-            <img src="${item.agent.image}" alt="${item.agent.name}" class="agent-avatar" />
+            <img src="${agentImg}" alt="${agentName}" class="agent-avatar" />
             <div>
               <span class="agent-label">Listing Agent</span>
-              <span class="agent-name">${item.agent.name}</span>
+              <span class="agent-name">${agentName}</span>
             </div>
           </div>
-          <a href="tel:${item.agent.phone}" class="agent-phone">📞 Call</a>
+          <a href="tel:${agentPhone}" class="agent-phone">📞 Call</a>
         </div>
       </div>
     `;
